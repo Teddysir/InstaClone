@@ -1,6 +1,4 @@
 package com.instagram.clone.entity;
-
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
