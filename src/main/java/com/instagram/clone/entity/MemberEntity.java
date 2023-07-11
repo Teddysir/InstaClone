@@ -35,6 +35,8 @@ public class MemberEntity extends BaseTimeEntity implements UserDetails {
     @Column(nullable = false)
     private String password;
 
+
+
     // EAGER 타입은 엔티티를 로드할 때 즉시 관련된 컬렉션 데이터도 함께 로드하라는 의미
     @ElementCollection(fetch = FetchType.EAGER) // 컬렉션 타입을 갖고있음을 뜻함
     @Builder.Default // Default 하면 기본 빈 ArrayList가 roles 필드에 할당됨
