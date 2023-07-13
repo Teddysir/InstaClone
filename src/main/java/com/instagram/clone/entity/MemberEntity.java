@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Getter@NoArgsConstructor
+@Getter
+@NoArgsConstructor
 @AllArgsConstructor
 public class MemberEntity extends BaseTimeEntity{
 
