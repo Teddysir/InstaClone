@@ -20,6 +20,7 @@ public class MemberSignUpApi {
         log.info("requestmemberdto", requestMemberDto);
         MemberEntity memberEntity = MemberEntity.builder()
                 .email(requestMemberDto.email)
+                .nickname(requestMemberDto.username)
                 .password(requestMemberDto.pw)
                 .build();
 
