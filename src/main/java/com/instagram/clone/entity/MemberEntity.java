@@ -1,9 +1,6 @@
 package com.instagram.clone.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,6 +13,7 @@ import java.util.stream.Collectors;
 
 @Entity
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -38,16 +36,24 @@ public class MemberEntity extends BaseTimeEntity implements UserDetails {
 
 
     // EAGER 타입은 엔티티를 로드할 때 즉시 관련된 컬렉션 데이터도 함께 로드하라는 의미
-    @ElementCollection(fetch = FetchType.EAGER) // 컬렉션 타입을 갖고있음을 뜻함
-    @Builder.Default // Default 하면 기본 빈 ArrayList가 roles 필드에 할당됨
-    private List<String> roles = new ArrayList<>();
+//    @ElementCollection(fetch = FetchType.EAGER) // 컬렉션 타입을 갖고있음을 뜻함
+//    @Builder.Default // Default 하면 기본 빈 ArrayList가 roles 필드에 할당됨
+//    private List<String> roles = new ArrayList<>();
+    private String roles;
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.roles.stream()
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());
+    public Collection<? extends GrantedAuthority> getAuthorities(){
+        Collection<GrantedAuthority> collect = new ArrayList<>();
+        collect.add(new SimpleGrantedAuthority(getRoles()));
+        return collect;
     }
+
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        return this.roles.stream()
+//                .map(SimpleGrantedAuthority::new)
+//                .collect(Collectors.toList());
+//    }
 
     @Override
     public String getUsername() {

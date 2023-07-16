@@ -26,9 +26,9 @@ public class JwtTokenProvider {
 
     private final Key key;
 
-    public JwtTokenProvider(@Value("${jwt.secret}") String secretKey) {
-        byte[] keyBytes = Decoders.BASE64URL.decode(secretKey);
-        this.key = Keys.hmacShaKeyFor(keyBytes);
+    // 하드코딩
+    public JwtTokenProvider() {
+        this.key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
     }
 
     public TokenInfo generateToken(Authentication authentication){
@@ -40,7 +40,7 @@ public class JwtTokenProvider {
         long now = (new Date()).getTime();
 
         //Access Token 생성
-        Date accessTokenExpiresIn = new Date(now + 86400000);
+        Date accessTokenExpiresIn = new Date(now + 864000);
         String accessToken = Jwts.builder()
                 .setSubject(authentication.getName())
                 .claim("auth",authorities)
