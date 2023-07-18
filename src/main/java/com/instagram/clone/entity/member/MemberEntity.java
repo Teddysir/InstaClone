@@ -1,4 +1,4 @@
-package com.instagram.clone.member.entity;
+package com.instagram.clone.entity.member;
 import com.instagram.clone.entity.BaseTimeEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,15 +10,15 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "members")
-public class Member extends BaseTimeEntity {
+@Table(name = "member_entity")
+public class MemberEntity extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
-    private Long id;
+    private Long memberId;
 
-    @Column(name = "username", nullable = false)
-    private String username;
+    @Column(name = "nickname", nullable = false,unique = true)
+    private String nickname;
 
     @Column(name = "email", nullable = false,unique = true)
     private String email;

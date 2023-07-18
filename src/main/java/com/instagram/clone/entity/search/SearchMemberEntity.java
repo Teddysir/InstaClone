@@ -1,16 +1,16 @@
-package com.instagram.clone.search.entity;
+package com.instagram.clone.entity.search;
 
 import javax.persistence.*;
 
-import com.instagram.clone.member.entity.Member;
+import com.instagram.clone.entity.member.MemberEntity;
 import lombok.Getter;
 
 @Getter
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn
-@Table(name = "searches")
-public class Search {
+@Table(name = "searchMember_entity")
+public class SearchMemberEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,16 +21,16 @@ public class Search {
     private Long count;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "username")
-    private Member member;
+    @JoinColumn(name = "nickname")
+    private MemberEntity memberEntity;
 
-    protected Search() {
+    protected SearchMemberEntity() {
         this.count = 0L;
     }
     public void upCount() {
         this.count++;
     }
-    public Search(Member member) {
-        this.member = member;
+    public SearchMemberEntity(MemberEntity memberEntity) {
+        this.memberEntity = memberEntity;
     }
 }

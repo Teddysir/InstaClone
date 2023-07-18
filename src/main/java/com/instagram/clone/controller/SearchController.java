@@ -1,12 +1,16 @@
-package com.instagram.clone.search.controller;
+package com.instagram.clone.controller;
 
-import com.instagram.clone.search.dto.SearchDto;
-import com.instagram.clone.search.service.SearchService;
+import com.instagram.clone.dto.search.SearchDto;
+import com.instagram.clone.dto.search.SearchHashtagDto;
+import com.instagram.clone.dto.search.SearchMemberDto;
+import com.instagram.clone.service.SearchService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -15,10 +19,23 @@ public class SearchController {
     private final SearchService searchService;
 
     @GetMapping
+    @ResponseBody
     public ResponseEntity<String> searchMember(@RequestParam String text){
-        final List<SearchDto> searchDtos = searchService.searchMember(text);
+        text = text.trim();
+        List<String> results;
 
-        return ResponseEntity.ok("검색 완료 : " + searchDtos);
+        if(text.charAt(0) == '#') {
+            if (text.equals('#')) {
+                results = Collections.emptyList();
+            } else {
+                final List<SearchHashtagDto> searchHashtagDtos = searchService.searchHashtag(text.substring(1));
+                results = searchHashtagDtos.stream().map(dto->dto.getHashtag().getName()).collect(Collectors.toList());
+            }
+        } else {
+            final List<SearchMemberDto> searchMemberDtos = searchService.searchMember(text);
+            results = searchMemberDtos.stream().map(dto->dto.getMember().getNickname()).collect(Collectors.toList());
+        }
+        return ResponseEntity.ok("검색 완료 : " + results);
     }
 
     //    @PostMapping(value = "/mark")
