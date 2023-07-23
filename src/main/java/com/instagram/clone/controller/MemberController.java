@@ -1,5 +1,6 @@
 package com.instagram.clone.controller;
 
+import com.instagram.clone.Service.CustomUserDetailsService;
 import com.instagram.clone.Service.MemberService;
 import com.instagram.clone.dto.MemberLoginRequestDto;
 import com.instagram.clone.dto.MemberRegisterRequestDto;
@@ -21,14 +22,35 @@ import org.springframework.web.bind.annotation.RestController;
 public class MemberController {
     private final MemberService memberService;
     private final MemberRepository memberRepository;
+    private final CustomUserDetailsService customUserDetailsService;
 
     @PostMapping("/login")
     public TokenInfo login(@RequestBody MemberLoginRequestDto dto){
         String email = dto.getEmail();
         String password = dto.getPassword();
         TokenInfo tokenInfo = memberService.login(email,password);
+        System.out.println("print");
         return tokenInfo;
     }
+
+
+//        @PostMapping("/register")
+//        public ResponseEntity<String> register(@RequestBody MemberEntity member){
+//            String nickname = member.getNickname();
+//            String email = member.getEmail();
+//            String password = member.getPassword();
+//            member.setRoles("USER");
+//            memberRepository.save(member);
+//
+//            return ResponseEntity.ok("회원가입 되었습니다.");
+//        }
+
+//    @PostMapping("/register") //
+//    public ResponseEntity<String> register(@RequestBody MemberRegisterRequestDto dto) {
+//        System.out.println("register");
+//        customUserDetailsService.registerMember(dto);
+//        return ResponseEntity.ok("회원가입 되었습니다.");
+//    }
 
 //    @PostMapping("/register")
 //    public ResponseEntity<String> register(@RequestBody MemberRegisterRequestDto dto) {
@@ -37,21 +59,10 @@ public class MemberController {
 //                .email(dto.getEmail())
 //                .password(dto.getPassword())
 //                .build();
+//        member.setRoles("USER");
 //
 //        memberRepository.save(member);
 //
 //        return ResponseEntity.ok("회원가입 되었습니다.");
 //    }
-
-        @PostMapping("/register")
-        public ResponseEntity<String> register(@RequestBody MemberEntity member){
-            String nickname = member.getNickname();
-            String email = member.getEmail();
-            String password = member.getPassword();
-            member.setRoles("USER");
-
-            memberRepository.save(member);
-
-            return ResponseEntity.ok("회원가입 되었습니다.");
-        }
 }
