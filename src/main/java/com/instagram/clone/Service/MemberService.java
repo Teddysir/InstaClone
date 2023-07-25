@@ -32,9 +32,4 @@ public class MemberService {
         return tokenInfo;
     }
 
-//    @Transactional
-//    public void  register(MemberEntity member){
-//
-//        memberRepository.save(member.getEmail(),member.getPassword());
-//    }
 }

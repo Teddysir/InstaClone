@@ -32,12 +32,10 @@ public class SecurityConfig {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/members/**").permitAll()
-//                .antMatchers("/members/test").hasRole("USER")
+                .antMatchers("/members/test").hasRole("USER")
                 .anyRequest().permitAll()
               .and()
-
-                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
-        log.debug("출력해보자");
+                .   addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 

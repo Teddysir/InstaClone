@@ -10,10 +10,15 @@ import com.instagram.clone.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Collection;
+import java.util.Collections;
 
 @Slf4j
 @RestController
@@ -29,40 +34,18 @@ public class MemberController {
         String email = dto.getEmail();
         String password = dto.getPassword();
         TokenInfo tokenInfo = memberService.login(email,password);
-        System.out.println("print");
         return tokenInfo;
     }
 
+    @PostMapping("/register")
+    public ResponseEntity<String> register(@RequestBody MemberRegisterRequestDto dto) {
 
-//        @PostMapping("/register")
-//        public ResponseEntity<String> register(@RequestBody MemberEntity member){
-//            String nickname = member.getNickname();
-//            String email = member.getEmail();
-//            String password = member.getPassword();
-//            member.setRoles("USER");
-//            memberRepository.save(member);
-//
-//            return ResponseEntity.ok("회원가입 되었습니다.");
-//        }
+        MemberRegisterRequestDto member = customUserDetailsService.registerMember(dto);
 
-//    @PostMapping("/register") //
-//    public ResponseEntity<String> register(@RequestBody MemberRegisterRequestDto dto) {
-//        System.out.println("register");
-//        customUserDetailsService.registerMember(dto);
-//        return ResponseEntity.ok("회원가입 되었습니다.");
-//    }
+        return ResponseEntity.ok("회원가입 완료");
+    }
 
-//    @PostMapping("/register")
-//    public ResponseEntity<String> register(@RequestBody MemberRegisterRequestDto dto) {
-//        MemberEntity member = MemberEntity.builder()
-//                .nickname(dto.getNickname())
-//                .email(dto.getEmail())
-//                .password(dto.getPassword())
-//                .build();
-//        member.setRoles("USER");
-//
-//        memberRepository.save(member);
-//
-//        return ResponseEntity.ok("회원가입 되었습니다.");
-//    }
+
+
+
 }
