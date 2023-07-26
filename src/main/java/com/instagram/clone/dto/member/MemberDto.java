@@ -1,4 +1,4 @@
-package com.instagram.clone.dto;
+package com.instagram.clone.dto.member;
 
 import com.instagram.clone.entity.member.MemberEntity;
 import lombok.AllArgsConstructor;

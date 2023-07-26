@@ -1,6 +1,6 @@
 package com.instagram.clone.dto.search;
 
-import com.instagram.clone.dto.MemberDto;
+import com.instagram.clone.dto.member.MemberDto;
 import com.instagram.clone.entity.member.MemberEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
