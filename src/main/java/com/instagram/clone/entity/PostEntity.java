@@ -2,6 +2,7 @@ package com.instagram.clone.entity;
 
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import java.util.List;
 
 @Entity
 @Getter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class PostEntity extends BaseTimeEntity{
@@ -26,6 +28,10 @@ public class PostEntity extends BaseTimeEntity{
     @Column
     @OneToMany(mappedBy = "post")
     private List<CommentEntity> comment = new ArrayList<>();
+
+    @Column
+    @OneToMany(mappedBy = "post")
+    private List<LikeEntity> like = new ArrayList<>();
 
     @Column
     private String Image;
