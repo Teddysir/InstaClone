@@ -5,8 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +32,8 @@ public class PostEntity extends BaseTimeEntity{
     private List<CommentEntity> comment = new ArrayList<>();
 
     @Column
-    private String Image;
+    @Lob
+    private byte[] Image;
 
     @ManyToOne
     @JoinColumn(name = "member_id")
