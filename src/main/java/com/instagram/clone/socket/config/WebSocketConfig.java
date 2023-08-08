@@ -1,5 +1,6 @@
-package com.instagram.clone.socket;
+package com.instagram.clone.socket.config;
 
+import com.instagram.clone.socket.WebSocketChatHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
