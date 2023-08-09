@@ -34,7 +34,8 @@ public class PostEntity extends BaseTimeEntity{
     private List<LikeEntity> like = new ArrayList<>();
 
     @Column
-    private String Image;
+    @Lob
+    private byte[] Image;
 
     @ManyToOne
     @JoinColumn(name = "member_id")

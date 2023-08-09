@@ -14,15 +14,20 @@ public class PostService {
 
     private final PostRepository postRepository;
 
-    public PostEntity registerPost(RequestPostDto requestPostDto) {
+    // 게시물 등록
+    public PostEntity registerPost(RequestPostDto requestPostDto){
         PostEntity postEntity = PostEntity.builder()
-
+//                .member() -> 멤버 정보! : 어떤 방식으로 가져올지 생각해보기
                 .Image(requestPostDto.getImage())
                 .content(requestPostDto.getContent())
                 .build();
 
         postRepository.save(postEntity);
-        return postEntity;
+        return postEntity; // postEntity 반환
     }
+
+
+    // 게시물 삭제
+
 
 }
