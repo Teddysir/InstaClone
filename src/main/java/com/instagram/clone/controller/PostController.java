@@ -10,7 +10,10 @@ import com.instagram.clone.service.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @Slf4j
@@ -44,6 +47,25 @@ public class PostController {
 
         return new ResponseLikeDto(like.getId());
     }
+
+    @DeleteMapping("/{postId}/unlike/{likeId}")
+    public ResponseEntity<String> registerUnLike(@PathVariable("likeId") Long likeId) {
+
+        likeService.registerUnLike(likeId);
+
+        return ResponseEntity.ok("좋아요 취소 성공");
+    }
+
+
+
+    @PostMapping("/{postId}/likeNumber")
+    public ResponseCountLikeDto countLike(@PathVariable("postId") Long id) {
+
+        Long count = likeService.countLike(id);
+
+        return new ResponseCountLikeDto(count);
+    }
+
 
 
 }

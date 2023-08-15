@@ -1,7 +1,6 @@
 package com.instagram.clone.service;
 
 
-import com.instagram.clone.dto.RequestLikeDto;
 import com.instagram.clone.entity.LikeEntity;
 import com.instagram.clone.entity.PostEntity;
 import com.instagram.clone.repository.LikeRepository;
@@ -10,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -32,4 +32,21 @@ public class LikeService {
 
         return likeEntity;
     }
+
+    public Long countLike(Long postId) {
+
+        return likeRepository.countByPostId(postId);
+    }
+
+    public void registerUnLike(Long likeId) {
+        LikeEntity likeEntity = likeRepository.findById(likeId).orElse(null);
+
+        if (likeEntity != null) {
+            likeRepository.delete(likeEntity);
+        }
+    }
+
+
+
 }
+
