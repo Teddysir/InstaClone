@@ -12,7 +12,8 @@ public class SearchHashtagDto extends SearchDto {
 
     private HashtagDto hashtag;
 
-    public SearchHashtagDto(HashtagEntity hashtagEntity) {
+    public SearchHashtagDto(String dtype, HashtagEntity hashtagEntity) {
+        super(dtype);
         this.hashtag = new HashtagDto(hashtagEntity);
     }
 }

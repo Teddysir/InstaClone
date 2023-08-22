@@ -14,10 +14,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "search_recent_entity")
 public class SearchRecentEntity {
-
-//    @Id
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "member_id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "recent_id")
@@ -29,13 +25,17 @@ public class SearchRecentEntity {
     @Column(name = "searched_name")
     private String searchedName;
 
+    @Column(name = "dtype")
+    private String dtype;
+
     @Column(name = "last_searched_date")
     private LocalDateTime lastSearchedDate;
 
     @Builder
-    public SearchRecentEntity(String searchedName) {
+    public SearchRecentEntity(String searchedName, String dtype) {
         this.memberId = Long.valueOf(1);
         this.searchedName = searchedName;
+        this.dtype = dtype;
     }
 
     public void updateLastSearchedDate() {

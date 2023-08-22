@@ -1,5 +1,6 @@
 package com.instagram.clone.dto.member;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.instagram.clone.entity.member.MemberEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,5 +20,14 @@ public class MemberDto {
         this.nickname = memberEntity.getNickname();
         this.email = memberEntity.getEmail();
         this.password = memberEntity.getPassword();
+    }
+
+    @JsonIgnore
+    public String getPassword() {
+        return password;
+    }
+    @JsonIgnore
+    public String getEmail() {
+        return email;
     }
 }
