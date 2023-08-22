@@ -29,6 +29,7 @@ public class GetPostApi {
         List<ResponseShowPostDto> collect = all.stream().map(
                 postEntity -> ResponseShowPostDto
                         .builder()
+                        .postId(postEntity.getId())
                         .content(postEntity.getContent())
                         .image(postEntity.getImage())
                         .build()
@@ -42,5 +43,6 @@ public class GetPostApi {
     public static class ResponseShowPostDto{
         private byte[] image;
         private String content;
+        private Long postId;
     }
 }

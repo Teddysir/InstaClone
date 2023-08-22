@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -24,6 +26,12 @@ public class PostService {
 
         postRepository.save(postEntity);
         return postEntity; // postEntity 반환
+    }
+
+    public PostEntity getPostById(Long postId) {
+        Optional<PostEntity> optionalPost = postRepository.findById(postId);
+
+        return optionalPost.orElse(null);
     }
 
 

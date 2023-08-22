@@ -25,6 +25,17 @@ public class PostController {
     private final CommentService commentService;
     private final LikeService likeService;
 
+    @GetMapping("/{postId}")
+    public ResponseEntity<PostEntity> getPostById(@PathVariable Long postId) {
+        PostEntity post = postService.getPostById(postId);
+
+        if (post == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(post);
+    }
+
     @PostMapping("/register")
     public ResponsePostDto registerPost(@RequestBody RequestPostDto requestPostDto){
         PostEntity post = postService.registerPost(requestPostDto);

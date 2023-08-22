@@ -8,13 +8,9 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-<<<<<<< HEAD
 @Getter
 @NoArgsConstructor
-=======
 @Builder
-@Getter@NoArgsConstructor
->>>>>>> 62511d7e2a9964d822f215870fc45692db6768a1
 @AllArgsConstructor
 public class MemberEntity extends BaseTimeEntity{
 
