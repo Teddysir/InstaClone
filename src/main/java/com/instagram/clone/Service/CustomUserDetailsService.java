@@ -1,4 +1,4 @@
-package com.instagram.clone.Service;
+package com.instagram.clone.service;
 
 import com.instagram.clone.entity.MemberEntity;
 import com.instagram.clone.repository.MemberRepository;
