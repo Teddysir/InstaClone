@@ -10,9 +10,10 @@ import java.util.List;
 @Data
 @Builder
 public class ResponsePostByPostId {
-    private String postId;
+    private Long postId;
 
     @Lob
+    private byte[] image;
     private String content;
     private String title;
     private Long likeCount;

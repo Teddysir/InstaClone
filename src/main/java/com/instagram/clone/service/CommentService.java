@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.Optional;
 
 
@@ -21,11 +22,12 @@ public class CommentService {
     private final PostRepository postRepository;
 
     // 게시물 댓글 등록
-    public CommentEntity registerComment(RequestCommentDto requestCommentDto) {
+    public CommentEntity registerComment(String principal,RequestCommentDto requestCommentDto) {
 
         Optional<PostEntity> postEntityOptional = postRepository.findById(requestCommentDto.getPostId());
 
         CommentEntity commentEntity = CommentEntity.builder()
+                .member(principal)
                 .content(requestCommentDto.getContent())
                 .post(postEntityOptional.get())
                 .build();

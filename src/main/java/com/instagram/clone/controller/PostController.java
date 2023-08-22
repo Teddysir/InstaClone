@@ -12,9 +12,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -64,10 +66,10 @@ public class PostController {
     }
 
     @PostMapping("/{postId}/comment")
-    public ResponseCommentDto registerComment(@RequestBody RequestCommentDto requestCommentDto, @PathVariable Long postId) {
+    public ResponseCommentDto registerComment(@AuthenticationPrincipal Principal principal, @RequestBody RequestCommentDto requestCommentDto, @PathVariable Long postId) {
 
         requestCommentDto.setPostId(postId);
-        CommentEntity comment = commentService.registerComment(requestCommentDto);
+        CommentEntity comment = commentService.registerComment(String.valueOf(principal),requestCommentDto);
         return new ResponseCommentDto(comment.getId());
     }
 
