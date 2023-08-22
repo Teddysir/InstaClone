@@ -4,6 +4,7 @@ import com.instagram.clone.dto.*;
 import com.instagram.clone.entity.CommentEntity;
 import com.instagram.clone.entity.LikeEntity;
 import com.instagram.clone.entity.PostEntity;
+import com.instagram.clone.repository.LikeRepository;
 import com.instagram.clone.service.CommentService;
 import com.instagram.clone.service.LikeService;
 import com.instagram.clone.service.PostService;
@@ -14,27 +15,46 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @Slf4j
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/post")
 public class PostController {
 
     private final PostService postService;
     private final CommentService commentService;
     private final LikeService likeService;
+    private final LikeRepository likeRepository;
 
     @GetMapping("/{postId}")
-    public ResponseEntity<PostEntity> getPostById(@PathVariable Long postId) {
+    public ResponseEntity<ResponsePostByPostId> getPostById(@PathVariable Long postId) {
         PostEntity post = postService.getPostById(postId);
+        Long count = likeRepository.countByPostId(postId);
+
+        List<CommentDto> collect = post.getComment().stream().map(comment -> CommentDto.builder()
+                .memberName(comment.getMember())
+                .content(comment.getContent())
+                .build()).collect(Collectors.toList());
+
+        ResponsePostByPostId build = ResponsePostByPostId.builder()
+                .content(post.getContent())
+                .title(post.getContent())
+                .likeCount(count)
+                .comments(collect)
+                .build();
+
 
         if (post == null) {
             return ResponseEntity.notFound().build();
         }
 
-        return ResponseEntity.ok(post);
+        return ResponseEntity.ok(build);
     }
+
 
     @PostMapping("/register")
     public ResponsePostDto registerPost(@RequestBody RequestPostDto requestPostDto){

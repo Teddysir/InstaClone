@@ -1,6 +1,6 @@
 package com.instagram.clone.controller;
 
-import com.instagram.clone.Service.MemberService;
+import com.instagram.clone.service.MemberService;
 import com.instagram.clone.dto.MemberLoginRequestDto;
 import com.instagram.clone.dto.TokenInfo;
 import lombok.RequiredArgsConstructor;
@@ -10,12 +10,11 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:3000/login")
-@RequestMapping("/api")
+@CrossOrigin(origins = "http://localhost:3000")
 public class MemberController {
     private final MemberService memberService;
 
-    @PostMapping("/login")
+    @PostMapping("/api/login")
     public TokenInfo login(@RequestBody MemberLoginRequestDto dto){
         String email = dto.getEmail();
         String password = dto.getPassword();

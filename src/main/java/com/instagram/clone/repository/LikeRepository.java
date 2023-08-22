@@ -9,5 +9,6 @@ import java.util.List;
 public interface LikeRepository extends JpaRepository<LikeEntity, Long> {
 
     Long countByPostId(Long postId);
+
 }
 

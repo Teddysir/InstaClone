@@ -6,10 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,12 +15,13 @@ import java.util.stream.Collectors;
 @Slf4j
 @RequiredArgsConstructor
 @CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping("api/post")
+@RequestMapping("/api/post")
 public class GetPostApi {
 
     private final PostRepository postRepository;
 
     @GetMapping("/all") //parameter : userId
+    @ResponseBody
     public List<ResponseShowPostDto> showPostDto(){
         List<PostEntity> all = postRepository.findAll();
         List<ResponseShowPostDto> collect = all.stream().map(

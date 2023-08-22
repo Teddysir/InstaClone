@@ -22,11 +22,11 @@ public class CommentEntity extends BaseTimeEntity{
     @Column
     private String content;
 
-    @Column
     private String member;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     private PostEntity post;
+
 
 }

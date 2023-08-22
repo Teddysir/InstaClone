@@ -1,4 +1,4 @@
-package com.instagram.clone.Service;
+package com.instagram.clone.service;
 
 import com.instagram.clone.dto.TokenInfo;
 import com.instagram.clone.jwt.JwtTokenProvider;
@@ -9,9 +9,11 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @Service
 @Transactional(readOnly = true)
+@CrossOrigin(origins = "http://localhost:3000")
 @RequiredArgsConstructor
 public class MemberService {
 
