@@ -1,6 +1,6 @@
 package com.instagram.clone.controller;
 
-import com.instagram.clone.Service.MemberService;
+import com.instagram.clone.service.MemberService;
 import com.instagram.clone.dto.MemberLoginRequestDto;
 import com.instagram.clone.dto.TokenInfo;
 import lombok.RequiredArgsConstructor;
